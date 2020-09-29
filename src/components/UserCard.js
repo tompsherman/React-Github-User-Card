@@ -5,19 +5,17 @@ const UserCard = (props) => {
    
    return(
         <div> 
-            {/* {props.userInfo.map(info=>(
-                <div>
-                    <img src={info.image} alt={info.name} />
-                    <h2>{info.name}</h2>
-                </div>
-            ))}
-             */}
+            
             < img src={props.userInfo.avatar_url} alt="{props.userInfo.avatar_url}"/>
             <h2>{props.userInfo.name}</h2>
             <h3>{props.userInfo.login}</h3>
             <h3>{props.userInfo.html_url}</h3>
-            <h2></h2>
-            <h2>{props.userInfo.name}</h2>
+            <h3>followers:</h3>
+            {props.followers.map(person=>(
+                <div>
+                    <h2>{person.login}</h2>
+                </div>
+            ))}
             
         </div>
     )

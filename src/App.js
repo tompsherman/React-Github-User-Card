@@ -7,15 +7,24 @@ class App extends React.Component {
   constructor(){
     super()
     this.state = {
-      userData: []
+      userData: [],
+      followers: []
     }
   }
   componentDidMount(){
     axios  
       .get("https://api.github.com/users/tompsherman")
       .then(response => this.setState({userData: response.data}))
-      .catch(err=>console.log("error in .get"))
+      .catch(err=>console.log("error getting USERDATA"))
       
+    axios
+      .get("https://api.github.com/users/tompsherman/followers")
+      .then(response =>  this.setState({followers: response.data}))
+      .catch(err=>console.log("ERROR getting followers"))
+  }
+
+  getUser = () => {
+
   }
   
   render(){
@@ -23,7 +32,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>these are my user cards:</h1>
-        <UserCard userInfo={this.state.userData}/>
+        <UserCard userInfo={this.state.userData} followers={this.state.followers}/>
       </div>
      )
   }
