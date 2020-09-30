@@ -31,7 +31,12 @@ class App extends React.Component {
     console.log("render", this.state)
     return (
       <div className="App">
-        <h1>these are my user cards:</h1>
+        <h1>This is {this.state.userData.name}'s user card:</h1>
+        <form>
+          <input type="text" placeholder="enter github username" />
+          <button>show me the goods!</button>
+        </form>
+        <br></br>
         <UserCard userInfo={this.state.userData} followers={this.state.followers}/>
       </div>
      )

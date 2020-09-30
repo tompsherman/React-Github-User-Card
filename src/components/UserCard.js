@@ -13,7 +13,7 @@ const UserCard = (props) => {
             <h3>followers:</h3>
             {props.followers.map(person=>(
                 <div>
-                    <h2>{person.login}</h2>
+                    <h4>{person.login}</h4>
                 </div>
             ))}
             
