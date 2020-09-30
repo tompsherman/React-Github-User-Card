@@ -8,23 +8,33 @@ class App extends React.Component {
     super()
     this.state = {
       userData: [],
-      followers: []
+      followers: [],
+      username: "tompsherman"
     }
   }
   componentDidMount(){
-    axios  
-      .get("https://api.github.com/users/tompsherman")
-      .then(response => this.setState({userData: response.data}))
-      .catch(err=>console.log("error getting USERDATA"))
-      
+   this.getUser(this.state.username)
     axios
-      .get("https://api.github.com/users/tompsherman/followers")
+      .get(`https://api.github.com/users/${this.username}/followers`)
       .then(response =>  this.setState({followers: response.data}))
       .catch(err=>console.log("ERROR getting followers"))
   }
 
-  getUser = () => {
+  getUser = (username) => {
+    axios  
+    .get(`https://api.github.com/users/${username}`)
+    .then(response => this.setState({userData: response.data}))
+    .catch(err=>console.log("error getting USERDATA"))
+    
+  }
 
+  changehandler = (e) => {
+    this.setState({ username: e.target.value})
+  }
+
+  submitHandler = (e) => {
+    e.preventDefault()
+    this.getUser(this.state.username)
   }
   
   render(){
@@ -32,8 +42,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>This is {this.state.userData.name}'s user card:</h1>
-        <form>
-          <input type="text" placeholder="enter github username" />
+        <form onSubmit={this.submitHandler}>
+          <input name="username" type="text" placeholder="enter github username" value={this.state.username} onChange={this.changeHandler}/>
           <button>show me the goods!</button>
         </form>
         <br></br>
