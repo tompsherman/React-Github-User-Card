@@ -14,10 +14,8 @@ class App extends React.Component {
   }
   componentDidMount(){
    this.getUser(this.state.username)
-    axios
-      .get(`https://api.github.com/users/${this.username}/followers`)
-      .then(response =>  this.setState({followers: response.data}))
-      .catch(err=>console.log("ERROR getting followers"))
+   this.getFollowers(this.state.username)
+    
   }
 
   getUser = (username) => {
@@ -28,7 +26,14 @@ class App extends React.Component {
     
   }
 
-  changehandler = (e) => {
+  getFollowers = (username) => {
+    axios
+    .get(`https://api.github.com/users/${username}/followers`)
+    .then(response =>  this.setState({followers: response.data}))
+    .catch(err=>console.log("ERROR getting followers"))
+  }
+
+  changeHandler = (e) => {
     this.setState({ username: e.target.value})
   }
 
@@ -43,7 +48,12 @@ class App extends React.Component {
       <div className="App">
         <h1>This is {this.state.userData.name}'s user card:</h1>
         <form onSubmit={this.submitHandler}>
-          <input name="username" type="text" placeholder="enter github username" value={this.state.username} onChange={this.changeHandler}/>
+          <input 
+            name="username" 
+            type="text" 
+            placeholder="enter github username" 
+            value={this.state.username} 
+            onChange={this.changeHandler}/>
           <button>show me the goods!</button>
         </form>
         <br></br>

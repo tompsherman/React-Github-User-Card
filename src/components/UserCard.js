@@ -9,7 +9,7 @@ const UserCard = (props) => {
             < img src={props.userInfo.avatar_url} alt="{props.userInfo.avatar_url}"/>
             <h2>{props.userInfo.name}</h2>
             <h3>{props.userInfo.login}</h3>
-            <h3>{props.userInfo.html_url}</h3>
+            <h3><a href={props.userInfo.html_url}>{props.userInfo.html_url}</a></h3>
             <h3>followers:</h3>
             {props.followers.map(person=>(
                 <div>
